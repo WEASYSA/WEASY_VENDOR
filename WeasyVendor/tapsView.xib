@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="DPO-gW-gL9" customClass="tapsView" customModule="WeasyVendor" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="yOg-Ab-MBK">
+                    <rect key="frame" x="10" y="742" width="394" height="110"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1Y-XV-9Ev">
+                            <rect key="frame" x="0.0" y="0.0" width="131.5" height="110"/>
+                            <state key="normal" title="Orders">
+                                <color key="titleColor" red="0.96156626940000001" green="0.50306183100000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kdp-R1-blo">
+                            <rect key="frame" x="131.5" y="0.0" width="131" height="110"/>
+                            <state key="normal" title="items">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PYs-dw-glD">
+                            <rect key="frame" x="262.5" y="0.0" width="131.5" height="110"/>
+                            <state key="normal" title="account">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="0bT-s2-qCI"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="0.89011114840000005" green="0.89032465220000001" blue="0.8860062957" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="5Fa-CW-LXI" firstAttribute="trailing" secondItem="yOg-Ab-MBK" secondAttribute="trailing" constant="10" id="s9j-vk-VI4"/>
+                <constraint firstItem="yOg-Ab-MBK" firstAttribute="leading" secondItem="5Fa-CW-LXI" secondAttribute="leading" constant="10" id="y9R-55-ssZ"/>
+                <constraint firstItem="5Fa-CW-LXI" firstAttribute="bottom" secondItem="yOg-Ab-MBK" secondAttribute="bottom" constant="10" id="zzK-5q-uvy"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="5Fa-CW-LXI"/>
+            <connections>
+                <outlet property="accountBtn" destination="PYs-dw-glD" id="Yl5-Pp-bFV"/>
+                <outlet property="contentView" destination="yOg-Ab-MBK" id="tCm-wZ-iqT"/>
+                <outlet property="itemsBtn" destination="Kdp-R1-blo" id="V3y-0o-Zpe"/>
+                <outlet property="ordersBtn" destination="i1Y-XV-9Ev" id="PB5-Zb-VHY"/>
+            </connections>
+            <point key="canvasLocation" x="236.23188405797103" y="-100.44642857142857"/>
+        </view>
+    </objects>
+</document>

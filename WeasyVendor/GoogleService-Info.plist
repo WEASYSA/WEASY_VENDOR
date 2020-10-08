@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>106463271400-l9qqu60l9t2m5nqqr8sa5gbt8hiqe2gc.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.106463271400-l9qqu60l9t2m5nqqr8sa5gbt8hiqe2gc</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDejQjTQ67vp3_qOrabf0a6ubJBbbpY6iI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>106463271400</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.creativitySol.WeasyVendor</string>
+	<key>PROJECT_ID</key>
+	<string>weasy-vendor</string>
+	<key>STORAGE_BUCKET</key>
+	<string>weasy-vendor.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:106463271400:ios:386fcc064b9ffc3df5ec5d</string>
+	<key>DATABASE_URL</key>
+	<string>https://weasy-vendor.firebaseio.com</string>
+</dict>
+</plist>

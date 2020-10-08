@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  WeasyVendor
+
+  Created by Amal Elgalant on 2/18/20.
+  Copyright © 2020 Amal Elgalant. All rights reserved.
+*/
+"SAR" = "ريال سعودي";
+"Waiting" = "قيد الانتظار";
+"items" = "منتج";
+"No Internet Connection" = "لا يوجد انترنت";
+"OK" = "موافق";
+"close Weasy" = "اغلق ويزي";
+"SAR" = "ريال سعودي";
+"declined" = "مرفوض";
+"ready to pickup" = "جاهز للاستلام";
+"completed" = "مكتمل";
+"order placed" = "تم الطلب";
+"enter your user name" = "ادخل اسم المستخدم";
+"password should be greater than 6 digits" = "يجب الا تقل كلمة المرور عن ٦ احروف";
+"Pay" = "ادفع";
+"Done" = "تم";
+"preparing" = "تحت التحضير";
+"cash" = "نقدي";
+"points" = "نقاط ويزي";
+"online" = "مدي";
