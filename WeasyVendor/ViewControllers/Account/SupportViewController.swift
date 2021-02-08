@@ -49,7 +49,7 @@ class SupportViewController: UIViewController {
                 
             }
             else {
-                self.noInternetDialog()
+                self.showErrorAlert(with: msg)
             }
             
         }, msgContent: messageContent.text!)

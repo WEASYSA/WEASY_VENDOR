@@ -13,9 +13,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var textFields: [UITextField]!
     @IBOutlet weak var userNameTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
-    
-    @IBOutlet weak var loginButton: UIButton!
-    
+    @IBOutlet weak var loginButton: UIButton!    
     @IBOutlet weak var passwordErrorLbl: UILabel!
     @IBOutlet weak var userNameErrorLbl: UILabel!
     override func viewDidLoad() {
@@ -41,25 +39,15 @@ class LoginViewController: UIViewController {
             else {
                 self.loginButton.isEnabled = true
                 self.loginButton.alpha = 1
-                self.noInternetDialog()
+                self.showErrorAlert(with: msg)
             }
-            
         },  userName: userNameTF.text!, password: passwordTF.text!)
         
-        
     }
+    
     @objc private func textDidChange(_ notification: Notification) {
         enableButton()
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 extension LoginViewController: UITextFieldDelegate{
@@ -68,7 +56,7 @@ extension LoginViewController: UITextFieldDelegate{
         if textField == userNameTF{
             passwordTF.becomeFirstResponder()
         }
-            
+        
         else{
             textField.resignFirstResponder()
         }
@@ -132,16 +120,16 @@ extension LoginViewController{
                 return (true ,nil )
             }
         }
-//        else if textField == passwordTF{
-//            if textField.text!.count < 6 {
-//                return (false ,NSLocalizedString("password should be greater than 6 digits",comment:"") )
-//
-//            }
-//            else {
-//                return (true ,nil )
-//
-//            }
-//        }
+        //        else if textField == passwordTF{
+        //            if textField.text!.count < 6 {
+        //                return (false ,NSLocalizedString("password should be greater than 6 digits",comment:"") )
+        //
+        //            }
+        //            else {
+        //                return (true ,nil )
+        //
+        //            }
+        //        }
         return (true ,nil )
     }
     

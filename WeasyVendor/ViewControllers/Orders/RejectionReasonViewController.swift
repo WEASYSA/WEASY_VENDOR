@@ -39,9 +39,8 @@ class RejectionReasonViewController: UIViewController {
                 self.view.makeToast(msg)
             }
             else {
-                self.noInternetDialog()
+                self.showErrorAlert(with: msg)
             }
-            
             
         }, comment: reasonTextView.text, orderID: orderID)
         

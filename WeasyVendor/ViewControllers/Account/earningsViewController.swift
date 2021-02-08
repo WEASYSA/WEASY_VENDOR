@@ -53,15 +53,12 @@ class earningsViewController: UIViewController {
                 self.totalCashLbl.text = String (earnings.totalCash)
                 self.totalCreditLbl.text = String (earnings.totalCreditCard)
                 self.moneyLbl.text = String (earnings.price)
-                
-                
-                
             }
             else if check == 1{
                 self.view.makeToast(msg)
             }
             else {
-                self.noInternetDialog()
+                self.showErrorAlert(with: msg)
             }
         })
     }

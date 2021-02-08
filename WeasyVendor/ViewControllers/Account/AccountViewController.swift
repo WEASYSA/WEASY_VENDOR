@@ -56,7 +56,7 @@ class AccountViewController: UIViewController {
                 self.view.makeToast(msg)
             }
             else {
-                self.noInternetDialog()
+                self.showErrorAlert(with: msg)
                 self.dinerInSwitch.setOn(!(self.dinerInSwitch != nil), animated: false)
             }
         }, dnn_table: status)
@@ -84,7 +84,7 @@ class AccountViewController: UIViewController {
                 self.view.makeToast(msg)
             }
             else {
-                self.noInternetDialog()
+                self.showErrorAlert(with: msg)
                 self.ruchTimeSwitch.setOn(!(self.ruchTimeSwitch != nil), animated: false)
             }
         }, rushTime: status)
@@ -110,8 +110,7 @@ class AccountViewController: UIViewController {
                 
             }
             else {
-                self.noInternetDialog()
-                
+                self.showErrorAlert(with: msg)
             }
         })
     }
@@ -127,15 +126,12 @@ class AccountViewController: UIViewController {
                 else {
                     self.dinerInSwitch.setOn(false, animated: false)
                 }
-                
             }
             else if check == 1{
                 self.view.makeToast(msg)
-                
             }
             else {
-                self.noInternetDialog()
-                
+                self.showErrorAlert(with: msg)
             }
         })
     }
@@ -157,7 +153,7 @@ class AccountViewController: UIViewController {
                         } else if check == 1{
                             self.view.makeToast(msg)
                         } else {
-                            self.noInternetDialog()
+                            self.showErrorAlert(with: msg)
                         }
                     }, branch_status: self.arrStatus[self.index])
                     
@@ -166,14 +162,5 @@ class AccountViewController: UIViewController {
         }, cancel: { ActionMultipleStringCancelBlock in return }, origin: sender)
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

@@ -35,7 +35,6 @@ class splashViewController: UIViewController {
                 self.performSegue(withIdentifier: "login", sender: nil)
             }
             
-            
         }
     }
     func getUserData(){

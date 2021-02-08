@@ -25,39 +25,30 @@ class BookingTableViewController: UIViewController {
         
         getBookings()
         
-        
     }
     
     func getBookings(){
         BookingController.bookingController.getBookingList(completion: {
             check, bookings, msg in
-            self.bookings = bookings
-            self.tableView.reloadData()
-            self.refreshControl.endRefreshing()
-            if check == 1{
+            if check == 0 {
+                self.bookings = bookings
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+            else if check == 1{
                 self.view.makeToast(msg)
             }
-            else if check == 2{
-                self.noInternetDialog()
-                
+            else {
+                self.showErrorAlert(with: msg)
             }
         })
     }
     @IBAction func backBtnAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    /*
-     // MARK: - Navigation
-     
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
+
 extension BookingTableViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

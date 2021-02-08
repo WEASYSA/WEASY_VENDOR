@@ -51,37 +51,22 @@ extension UIViewController{
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-    
-    
-    func noInternetDialog(){
         
-        let refreshAlert = UIAlertController(title: "", message:  NSLocalizedString("No Internet Connection",comment:""), preferredStyle: UIAlertController.Style.alert)
-        
-        refreshAlert.addAction(UIAlertAction(title:NSLocalizedString( "OK",comment:""), style: .default, handler: { (action: UIAlertAction!) in
+    func showErrorAlert(with message: String){
+        let refreshAlert = UIAlertController(title: "Error!".localized, message: message, preferredStyle: .alert)
+        refreshAlert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: { (action: UIAlertAction!) in
         }))
-        
         present(refreshAlert, animated: true)
-        
-        
-        
-        
-        
     }
+    
     func noLoginInternetDialog(){
         
-        let refreshAlert = UIAlertController(title: "", message:  NSLocalizedString("No Internet Connection",comment:""), preferredStyle: UIAlertController.Style.alert)
-        
-        
+        let refreshAlert = UIAlertController(title: "OK", message: "No Internet Connection".localized, preferredStyle: .alert)
         refreshAlert.addAction(UIAlertAction(title:NSLocalizedString( "close Weasy",comment:""), style: .default, handler: { (action: UIAlertAction!) in
             exit(0);
         }))
-        
         present(refreshAlert, animated: true)
-        
-        
-        
-        
-        
+ 
     }
     //    func checkValidPhonNumber(Phone:String  )->Bool{
     //        do {

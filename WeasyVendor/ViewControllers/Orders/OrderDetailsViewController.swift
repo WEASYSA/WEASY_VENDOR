@@ -65,8 +65,6 @@ class OrderDetailsViewController: UIViewController {
         OrderController.orderController.orderPreparing(completion: {
             check ,msg in
             if check == 0{
-                
-                
                 self.startPreparingBtn.isHidden = true
                 if self.order.payment == "cash"{
                     self.payBtn.isHidden = false
@@ -88,15 +86,13 @@ class OrderDetailsViewController: UIViewController {
                 self.view.makeToast(msg)
             }
             else {
-                self.noInternetDialog()
+                self.showErrorAlert(with: msg)
             }
         }, orderID: self.order.number)
     }
     
     @IBAction func payAction(_ sender: Any) {
-        
-        
-        
+
         OrderController.orderController.PayOrder(completion: {
             check ,msg in
             if check == 0{
@@ -108,7 +104,7 @@ class OrderDetailsViewController: UIViewController {
                 self.view.makeToast(msg)
             }
             else {
-                self.noInternetDialog()
+                self.showErrorAlert(with: msg)
             }
         }, orderID: self.order.number)
         
@@ -143,7 +139,7 @@ class OrderDetailsViewController: UIViewController {
                 self.rejectBtn.isEnabled = true
                 self.acceptOrderBtn.alpha = 1
                 self.rejectBtn.alpha = 1
-                self.noInternetDialog()
+                self.showErrorAlert(with: msg)
             }
             
         }, orderID: self.order.number)
@@ -217,15 +213,6 @@ class OrderDetailsViewController: UIViewController {
             
         }
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 extension OrderDetailsViewController: UITableViewDelegate, UITableViewDataSource{
@@ -268,10 +255,7 @@ extension OrderDetailsViewController{
             check, order,timer, msg in
             self.order.items = order.items
             print( self.order.items)
-            
             self.tableView.reloadData()
-            
-            
             if check == 0{
                 self.timeLeft = TimeInterval(timer)
                 print(self.timeLeft)
@@ -288,8 +272,8 @@ extension OrderDetailsViewController{
             else if check == 1{
                 self.view.makeToast(msg)
             }
-            else if check == 2{
-                self.noInternetDialog()
+            else {
+                self.showErrorAlert(with: msg)
             }
         }, orderID: self.order.number)
     }
@@ -343,10 +327,6 @@ extension OrderDetailsViewController{
         else {
             acceptRejectStackView.isHidden = true
             rejectedLbl.isHidden = true
-            
-            
-            
-            
             if order.status == "order placed" || (self.order.status == "payment done" && (self.order.payment == "online" || self.order.payment == "points")){
                 self.startPreparingBtn.isHidden = false
                 self.timerStackView.isHidden = false
@@ -421,7 +401,7 @@ extension OrderDetailsViewController: ConfirmReadyToPickupDelegate{
                 self.view.makeToast(msg)
             }
             else {
-                self.noInternetDialog()
+                self.showErrorAlert(with: msg)
             }
             
         }, orderID: order.number)
@@ -434,7 +414,6 @@ extension OrderDetailsViewController: ConfirmCompleteDelegate{
             
             if check == 0{
                 self.order.status = NSLocalizedString("completed", comment: "")
-                
                 self.acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
                 self.readyToPickupBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
                 self.completedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
@@ -447,7 +426,7 @@ extension OrderDetailsViewController: ConfirmCompleteDelegate{
                 self.view.makeToast(msg)
             }
             else {
-                self.noInternetDialog()
+                self.showErrorAlert(with: msg)
             }
             
         }, orderID: order.number)

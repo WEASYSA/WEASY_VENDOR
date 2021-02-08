@@ -52,6 +52,8 @@
 		65EB688223F4A179006F6146 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EB688123F4A179006F6146 /* ItemsViewController.swift */; };
 		65EB688423F4A328006F6146 /* ItemsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EB688323F4A328006F6146 /* ItemsController.swift */; };
 		AC9A490C8311CF5D6D563175 /* Pods_WeasyVendor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D73637F56152F0F20CE7D2A /* Pods_WeasyVendor.framework */; };
+		E085173225D1763300C14C1F /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085173125D1763300C14C1F /* NetworkReachabilityManager.swift */; };
+		E085173B25D1794B00C14C1F /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085173A25D1794B00C14C1F /* String + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +130,8 @@
 		65EB688123F4A179006F6146 /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		65EB688323F4A328006F6146 /* ItemsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsController.swift; sourceTree = "<group>"; };
 		81E1F2003E4334327DC7145B /* Pods-WeasyVendor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeasyVendor.debug.xcconfig"; path = "Target Support Files/Pods-WeasyVendor/Pods-WeasyVendor.debug.xcconfig"; sourceTree = "<group>"; };
+		E085173125D1763300C14C1F /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
+		E085173A25D1794B00C14C1F /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +184,8 @@
 		655BE3E623EBF863005E4F95 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E085173925D1793B00C14C1F /* Extensions */,
+				E085173025D1761E00C14C1F /* Managers */,
 				655D151923DE9D88003BD4F9 /* GeneralUIExtenstions.swift */,
 				655D151B23DE9DDC003BD4F9 /* GradientView.swift */,
 				655BE3E723EBF8AF005E4F95 /* UIViewControllerExtenstions.swift */,
@@ -333,6 +339,22 @@
 				3D73637F56152F0F20CE7D2A /* Pods_WeasyVendor.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E085173025D1761E00C14C1F /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				E085173125D1763300C14C1F /* NetworkReachabilityManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		E085173925D1793B00C14C1F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E085173A25D1794B00C14C1F /* String + Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		E6427F8652DA550061D1D82D /* Pods */ = {
@@ -533,6 +555,7 @@
 				65EB688223F4A179006F6146 /* ItemsViewController.swift in Sources */,
 				65EB687523F3B7C2006F6146 /* OrdersViewController.swift in Sources */,
 				6574673B23FB170C003BE2D0 /* ConfirmCompleteViewController.swift in Sources */,
+				E085173B25D1794B00C14C1F /* String + Extension.swift in Sources */,
 				65A831FE23FD2075003AB200 /* BookingTableViewController.swift in Sources */,
 				6574673523F9DA26003BE2D0 /* itemDetailsTableViewCell.swift in Sources */,
 				6574672D23F9355F003BE2D0 /* BranchController.swift in Sources */,
@@ -543,6 +566,7 @@
 				655BE3ED23EC2B0E005E4F95 /* APIConnection.swift in Sources */,
 				655BE3E523EBF762005E4F95 /* LoginViewController.swift in Sources */,
 				65A8320423FD4E11003AB200 /* BookingController.swift in Sources */,
+				E085173225D1763300C14C1F /* NetworkReachabilityManager.swift in Sources */,
 				65EB688423F4A328006F6146 /* ItemsController.swift in Sources */,
 				651CCC2523F6027500AA0B39 /* earningsViewController.swift in Sources */,
 				6574673923FB16F5003BE2D0 /* ConfirmReadyToPickupViewController.swift in Sources */,

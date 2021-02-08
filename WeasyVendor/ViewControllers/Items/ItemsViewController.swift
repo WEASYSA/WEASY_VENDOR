@@ -21,34 +21,22 @@ class ItemsViewController: UIViewController {
         getItems()
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
+
 extension ItemsViewController{
     func getItems(){
         ItemsController.itemsController.getItems(completion: {
             check, items,msg in
-            self.items = items
-            self.itemsTableView.reloadData()
-            
-            if check == 1{
+            if check == 0 {
+                self.items = items
+                self.itemsTableView.reloadData()
+            }            
+            else if check == 1{
                 self.view.makeToast(msg)
             }
-            else if check == 2{
-                self.noInternetDialog()
+            else{
+                self.showErrorAlert(with: msg)
             }
-            
-            
-            
         }
         )
     }
@@ -81,7 +69,7 @@ extension ItemsViewController: ItemsTableViewDelegate{
                 self.itemsTableView.reloadData()
             }
             else {
-                self.noInternetDialog()
+                self.showErrorAlert(with: msg)
                 self.itemsTableView.reloadData()
                 
             }
