@@ -12,7 +12,6 @@ public protocol rejectOrderDelegate: class {
     func reject(status: Bool)
 }
 
-
 class RejectionReasonViewController: UIViewController {
     open weak var Delegate: rejectOrderDelegate?
 
@@ -27,6 +26,7 @@ class RejectionReasonViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    
     @IBAction func submitAction(_ sender: Any) {
         OrderController.orderController.rejectOrders(completion: {
             check, msg in
@@ -43,12 +43,14 @@ class RejectionReasonViewController: UIViewController {
             }
             
         }, comment: reasonTextView.text, orderID: orderID)
-        
+//        self.dismiss(animated: false, completion: nil)
+//        self.Delegate?.reject(status: true)
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OrdersViewController")
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func cancelOrderAction(_ sender: Any) {
         self.Delegate?.reject(status: false)
-
         self.dismiss(animated: false, completion: nil)
     }
     
