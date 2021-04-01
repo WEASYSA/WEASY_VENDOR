@@ -9,8 +9,8 @@
 import Foundation
 
 class Constants{
-    static var DOMAIN = "https://weasy.sa/weasy/public/api/"
-//    static var DOMAIN = "https://weasy.sa/api/"
+//    static var DOMAIN = "https://weasy.sa/weasy/public/api/"
+    static var DOMAIN = "https://weasy.sa/api/"
     static var LOGIN = DOMAIN + "vendor_login"
     static var USER_DATA = DOMAIN + "vendor_profile"
     static var PENDING_ORDERS = DOMAIN + "vendor_orders_pending"
