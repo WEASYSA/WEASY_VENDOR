@@ -30,10 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Constants.HEADER["lang"] = AppDelegate.cuurentLanguage
         FirebaseApp.configure()
          Messaging.messaging().delegate = self
+        
         if #available(iOS 10.0, *) {
                    // For iOS 10 display notification (sent via APNS)
                    UNUserNotificationCenter.current().delegate = self
-                   
+
                    let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
                    UNUserNotificationCenter.current().requestAuthorization(
                        options: authOptions,
@@ -106,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let messageID = userInfo[gcmMessageIDKey] {
                 print("Message ID: \(messageID)")
             }
-            
+
             // Print full message.
             print(userInfo)
         }
@@ -164,7 +165,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //
             //    // Print full message.
             //    print(userInfo)
-            
+
             // Change this to your preferred presentation option
             completionHandler([.sound,.alert, .badge])
         }
@@ -180,8 +181,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             // Print full message.
             print(userInfo)
-            
-            
             completionHandler()
         }
     }
@@ -191,7 +190,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // [START refresh_token]
         func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
             print("Firebase registration token: \(fcmToken)")
-            
             let dataDict:[String: String] = ["token": fcmToken]
             NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
             // TODO: If necessary send token to application server.
@@ -206,7 +204,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
             print("Received data message: \(remoteMessage.appData)")
         }
+        
         // [END ios_10_data_message]
+
+        
     }
 
 

@@ -54,8 +54,9 @@ class OrderDetailsViewController: UIViewController {
     }
     
     @IBAction func startPreparingAction(_ sender: Any) {
-        OrderController.orderController.orderPreparing(completion: {
+        OrderController.orderController.orderPreparing(completion: {[weak self]
             check ,msg in
+            guard let self = self else {return}
             if check == 0{
 //                self.startPreparingBtn.isHidden = true
                 if self.order.payment == "cash"{
@@ -65,14 +66,11 @@ class OrderDetailsViewController: UIViewController {
                     self.payBtn.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
                     self.payBtn.isEnabled = false
                    self.payBtn.isHidden = false
-                    
                 }
                 self.timerStackView.isHidden = false
                 self.setupCounter()
-
                 self.statusStackView.isHidden = false
                 self.acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
-                
             }
             else if check == 1{
                 self.view.makeToast(msg)
@@ -85,8 +83,9 @@ class OrderDetailsViewController: UIViewController {
     
     @IBAction func payAction(_ sender: Any) {
 
-        OrderController.orderController.PayOrder(completion: {
+        OrderController.orderController.PayOrder(completion: {[weak self]
             check ,msg in
+            guard let self = self else {return}
             if check == 0{
                 self.order.isPaid = true
                 self.payBtn.isEnabled = false
@@ -99,31 +98,28 @@ class OrderDetailsViewController: UIViewController {
                 self.showErrorAlert(with: msg)
             }
         }, orderID: self.order.number)
-        
     }
     
-    
     func startPreparing() {
-        OrderController.orderController.orderPreparing(completion: {
+        OrderController.orderController.orderPreparing(completion: {[weak self]
             check ,msg in
+            guard let self = self else {return}
             if check == 0{
-//                self.startPreparingBtn.isHidden = true
-                if self.order.payment == "cash"{
+                //                self.startPreparingBtn.isHidden = true
+                if self.order.payment == "cash" || self.order.payment == "points"{
                     self.payBtn.isHidden = false
-                }
-                else {
+                }else {
                     self.payBtn.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
                     self.payBtn.isEnabled = false
-                   self.payBtn.isHidden = false
-                    
+                    self.payBtn.isHidden = false
                 }
                 self.timerStackView.isHidden = false
                 self.setupCounter()
-
+                
                 self.statusStackView.isHidden = false
                 self.acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
-                
             }
+            
             else if check == 1{
                 self.view.makeToast(msg)
             }
@@ -138,13 +134,21 @@ class OrderDetailsViewController: UIViewController {
         self.rejectBtn.isEnabled = false
         self.acceptOrderBtn.alpha = 0.5
         self.rejectBtn.alpha = 0.5
-        
-        OrderController.orderController.acceptOrders(completion: {
+        self.acceptRejectStackView.isHidden = true
+        self.statusStackView.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
+        }
+
+        OrderController.orderController.acceptOrders(completion: {[weak self]
             check, msg in
+            guard let self = self else {return}
             if check == 0 {
                 //                                self.statusStackView.isHidden = false
-                self.acceptRejectStackView.isHidden = true
+//                self.acceptRejectStackView.isHidden = true
                 self.timerStackView.isHidden = false
+//                self.statusStackView.isHidden = false
+//                self.acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
                 self.setupCounter()
                 self.startPreparing()
                 
@@ -225,19 +229,19 @@ class OrderDetailsViewController: UIViewController {
             timerLbl.text = timeLeft.time
             
         } else {
-            self.order.status = "ready to pickup"
+//            self.order.status = "ready to pickup"
             acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
-            readyToPickupBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
-            readyToPickupStack.isUserInteractionEnabled = false
+//            readyToPickupBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
+//            readyToPickupStack.isUserInteractionEnabled = false
             completedStack.isUserInteractionEnabled = true
             self.timerStackView.isHidden = false
             timerLbl.text = timeLeft.time
             timer.invalidate()
-            
         }
     }
     
 }
+
 extension OrderDetailsViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -275,8 +279,9 @@ extension OrderDetailsViewController: UITableViewDelegate, UITableViewDataSource
 extension OrderDetailsViewController{
     
     func getOrderDetails(){
-        OrderController.orderController.getOrderDetauls(completion: {
+        OrderController.orderController.getOrderDetauls(completion: {[weak self]
             check, order,timer, msg in
+            guard let self = self else {return}
             self.order.items = order.items
             print( self.order.items)
             self.tableView.reloadData()
@@ -290,7 +295,6 @@ extension OrderDetailsViewController{
                 }
                 else {
                     self.stopTimer()
-                    
                 }
             }
             else if check == 1{
@@ -318,7 +322,6 @@ extension OrderDetailsViewController{
         }
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 65.0
-        
         
         if order.status != "" && order.status != "declined" {
             payBtn.isHidden = false
@@ -355,8 +358,6 @@ extension OrderDetailsViewController{
 //                self.startPreparingBtn.isHidden = false
                 self.timerStackView.isHidden = false
                 self.setupCounter()
-
-                
             }else if order.status == "preparing"{
                 acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
                 readyToPickupStack.isUserInteractionEnabled = true
@@ -379,7 +380,6 @@ extension OrderDetailsViewController{
             }
             else if order.status == "completed"{
 //                self.startPreparingBtn.isHidden = true
-                
                 acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
                 readyToPickupBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
                 completedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
@@ -392,6 +392,7 @@ extension OrderDetailsViewController{
         }
     }
 }
+
 extension OrderDetailsViewController: rejectOrderDelegate{
     func reject(status: Bool) {
         if status {
@@ -408,10 +409,11 @@ extension OrderDetailsViewController: rejectOrderDelegate{
         }
     }
 }
+
 extension OrderDetailsViewController: ConfirmReadyToPickupDelegate{
     func confirmReady(){
-        OrderController.orderController.pickupOrder(completion: { check, msg in
-            
+        OrderController.orderController.pickupOrder(completion: { [weak self] check, msg in
+            guard let self = self else {return}
             if check == 0{
                 self.order.status = NSLocalizedString("ready to pickup", comment: "")
                 self.acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
@@ -419,7 +421,6 @@ extension OrderDetailsViewController: ConfirmReadyToPickupDelegate{
                 self.readyToPickupStack.isUserInteractionEnabled = false
                 self.completedStack.isUserInteractionEnabled = true
                 self.timeLeft = 0
-                
             }
             else if check == 1{
                 self.view.makeToast(msg)
@@ -430,12 +431,12 @@ extension OrderDetailsViewController: ConfirmReadyToPickupDelegate{
             
         }, orderID: order.number)
     }
-    
 }
+
 extension OrderDetailsViewController: ConfirmCompleteDelegate{
     func confirmComplete() {
-        OrderController.orderController.confirmOrder(completion: { check, msg in
-            
+        OrderController.orderController.confirmOrder(completion: { [weak self] check, msg in
+            guard let self = self else {return}
             if check == 0{
                 self.order.status = NSLocalizedString("completed", comment: "")
                 self.acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)

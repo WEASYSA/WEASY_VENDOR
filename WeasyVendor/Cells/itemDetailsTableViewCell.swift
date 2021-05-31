@@ -9,8 +9,8 @@
 import UIKit
 
 class itemDetailsTableViewCell: UITableViewCell {
+  
     @IBOutlet weak var quantityLbl: UILabel!
-    
     @IBOutlet weak var priceLbl: UILabel!
     @IBOutlet weak var noteLable: UILabel!
     @IBOutlet weak var optionsLable: UILabel!
@@ -25,17 +25,13 @@ class itemDetailsTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func setData(item: Item){
-        quantityLbl.text = String(item.quantity) + NSLocalizedString("items", comment: "")
+        quantityLbl.text = String(item.quantity) + NSLocalizedString(" items", comment: "")
         nameLbl.text = item.name
-        priceLbl.text = String(item.price)
+        priceLbl.text = String(item.price) + NSLocalizedString(" SAR", comment: "")
         noteLable.text = item.note
-        optionsLable.text = item.size + ", " + item.options
-        
+        optionsLable.text = item.size + item.options
     }
-
 }

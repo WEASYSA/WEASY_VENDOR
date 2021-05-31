@@ -9,6 +9,7 @@
 import Foundation
 
 class Item{
+    
     var image = ""
     var name = ""
     var price = 0.0
@@ -18,33 +19,55 @@ class Item{
     var note = ""
     var options = ""
     var size = ""
+    
     init(){
         
     }
     
     init(with dictionary: [String: Any]?) {
         guard let dictionary = dictionary else { return }
-        id = dictionary["id"] as! Int
-        
-        image = dictionary["image_details"] as! String
-        name = dictionary["name"] as! String
-        price = dictionary["price"] as! Double
-        isAvailable = dictionary["available"] as! Bool
+        if let _id = dictionary["id"] as? Int {
+            id = _id
+        }
+        if let _image = dictionary["image_details"] as? String {
+            image = _image
+        }
+        if let _name = dictionary["name"] as? String {
+            name = _name
+        }
+        if let _price = dictionary["price"] as? Double {
+            price = _price
+        }
+        if let _isAvailable = dictionary["available"] as? Bool {
+            isAvailable = _isAvailable
+        }
     }
+    
     init(withDetails dictionary: [String: Any]?) {
         guard let dictionary = dictionary else { return }
-        id = dictionary["id"] as! Int
-        image = dictionary["image_details"] as! String
-        name = dictionary["itemname"] as! String
-        price = dictionary["total_item_price"] as! Double
-        quantity = dictionary["quantity"] as! Int
-        note = dictionary["note"] as! String
-        options = dictionary["item_options"] as! String
-        
+        if let _id = dictionary["id"] as? Int {
+            id = _id
+        }
+        if let _image = dictionary["image_details"] as? String {
+            image = _image
+        }
+        if let _name = dictionary["itemname"] as? String {
+            name = _name
+        }
+        if let _price = dictionary["total_item_price"] as? Double {
+            price = _price
+        }
+        if let _quantity = dictionary["quantity"] as? Int {
+            quantity = _quantity
+        }
+        if let _note = dictionary["note"] as? String {
+            note = _note
+        }
+        if let _options = dictionary["item_options"] as? String {
+            options = _options
+        }        
         if let _size = dictionary["sizename"] as? String{
             size = _size
-
         }
-      
     }
 }

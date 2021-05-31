@@ -35,13 +35,27 @@ class Order{
         else if let  _price = dictionary["total_price"] as? Double{
             price = _price
         }
-        status = dictionary["status"] as! String
-        isPaid = dictionary["paid_money"] as! Bool
-        user.name = dictionary["customername"] as! String
-        time = dictionary["ordered_at"] as! String
-        payment = dictionary["payment_type"] as! String
-        numberofPeople = dictionary["num_of_people"] as! Int
-        isPaid = dictionary["paid_money"] as! Bool
+        if let _status = dictionary["status"] as? String {
+            status = _status
+        }
+        if let _isPaid = dictionary["paid_money"] as? Bool {
+            isPaid = _isPaid
+        }
+        if let _username = dictionary["customername"] as? String {
+            user.name = _username
+        }
+        if let _time = dictionary["ordered_at"] as? String {
+            time = _time
+        }
+        if let _payment = dictionary["payment_type"] as? String {
+            payment = _payment
+        }
+        if let _numberofPeople = dictionary["num_of_people"] as? Int {
+            numberofPeople = _numberofPeople
+        }
+        if let _isPaid = dictionary["paid_money"] as? Bool {
+            isPaid = _isPaid
+        }
     }
     
 }

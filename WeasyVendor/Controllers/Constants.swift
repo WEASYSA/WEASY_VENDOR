@@ -9,8 +9,8 @@
 import Foundation
 
 class Constants{
-//    static var DOMAIN = "https://weasy.sa/weasy/public/api/"
-    static var DOMAIN = "https://weasy.sa/api/"
+    static var DOMAIN = "https://weasy.sa/weasy/public/api/"
+//    static var DOMAIN = "https://weasy.sa/api/"
     static var LOGIN = DOMAIN + "vendor_login"
     static var USER_DATA = DOMAIN + "vendor_profile"
     static var PENDING_ORDERS = DOMAIN + "vendor_orders_pending"
@@ -31,7 +31,9 @@ class Constants{
     static var DAIN_IN = DOMAIN + "vendor_dnn_table"
     static var GET_DAIN_IN = DOMAIN + "vendor_get_dnn_table"
     static var BOOKING_TABLE = DOMAIN + "vendor_list_reservation_table"
-    static var LOG_OUT = DOMAIN + "vendor_logout_remove_device_token"
+    static var ADD_TOKEN = DOMAIN + "check_token_device_reservation_tbl"
+//    static var LOG_OUT = DOMAIN + "vendor_logout_remove_device_token"
+    static var LOGOUT = DOMAIN + "app_logout"
     static var MARK_AS_DEBTOR = DOMAIN + "vendor_debtor"
     static var vendor_branch_status = DOMAIN + "vendor_branch_status"
     //vendor_debtor
@@ -39,6 +41,5 @@ class Constants{
         "token": "",
         "Content-Type": "application/x-www-form-urlencoded",
         "lang" : AppDelegate.cuurentLanguage
-        
     ]
 }

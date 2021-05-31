@@ -20,14 +20,21 @@ class User{
     }
     
     init(with dictionary: [String: Any]?) {
-          guard let dictionary = dictionary else { return }
-               
-          token = String (dictionary["token"] as! Int)
-          id = dictionary["user_id"] as! Int
-          name = dictionary["name"] as! String
-          userName = dictionary["username"] as! String
+        guard let dictionary = dictionary else { return }
+        
+        token = String (dictionary["token"] as! Int)
+        
+        if let _id = dictionary["user_id"] as? Int {
+            id = _id
+        }
+        
+        if let  _name = dictionary["name"] as? String {
+            name = _name
+        }
+        
+        if let _userName = dictionary["username"] as? String {
+            userName = _userName
+        }
     }
-          
-    
     
 }

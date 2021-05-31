@@ -31,7 +31,7 @@ class AccountViewController: UIViewController {
     
     @IBAction func logoutAction(_ sender: Any) {
         AppDelegate.defaults.set(nil, forKey: "token")
-        UserController.userController.logout()
+        UserController.userController.logoutAndRemoveToken()
         
         self.performSegue(withIdentifier: "login", sender: self)
     }

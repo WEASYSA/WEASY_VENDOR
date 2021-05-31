@@ -26,6 +26,7 @@ class OrdersViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         setUpView()
+        UserController.userController.addToken(branchId: AppDelegate.currentUser.token)
         getOrders()
     }
     

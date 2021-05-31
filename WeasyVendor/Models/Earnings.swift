@@ -24,15 +24,30 @@ class Earnings{
     
     init(with dictionary: [String: Any]?) {
         guard let dictionary = dictionary else { return }
-        date = dictionary["today_date"] as! String
+        if let _date = dictionary["today_date"] as? String {
+            date = _date
+        }
         print(date)
-        day = dictionary["day"] as! String
-        price = dictionary["total_price"] as! Double
-        totalOrders = dictionary["total_orders"] as! Int
-        ordersCompleted = dictionary["orders_completed"] as! Int
-        ordersRejected = dictionary["orders_rejected"] as! Int
-        totalCreditCard = dictionary["total_credit_card_payment"] as! Double
-        totalCash = dictionary["total_cash_payment"] as! Double
-        
+        if let _day = dictionary["day"] as? String {
+            day = _day
+        }
+        if let _price = dictionary["total_price"] as? Double {
+            price = _price
+        }
+        if let _totalOrders = dictionary["total_orders"] as? Int {
+            totalOrders = _totalOrders
+        }
+        if let _ordersCompleted = dictionary["orders_completed"] as? Int {
+            ordersCompleted = _ordersCompleted
+        }
+        if let _ordersRejected = dictionary["orders_rejected"] as? Int {
+            ordersRejected = _ordersRejected
+        }
+        if let _totalCreditCard = dictionary["total_credit_card_payment"] as? Double {
+            totalCreditCard = _totalCreditCard
+        }
+        if let _totalCash = dictionary["total_cash_payment"] as? Double {
+            totalCash = _totalCash
+        }
     }
 }

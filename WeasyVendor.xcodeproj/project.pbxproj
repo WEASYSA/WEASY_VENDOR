@@ -54,6 +54,7 @@
 		AC9A490C8311CF5D6D563175 /* Pods_WeasyVendor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D73637F56152F0F20CE7D2A /* Pods_WeasyVendor.framework */; };
 		E085173225D1763300C14C1F /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085173125D1763300C14C1F /* NetworkReachabilityManager.swift */; };
 		E085173B25D1794B00C14C1F /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E085173A25D1794B00C14C1F /* String + Extension.swift */; };
+		E0F253972643904E0041EB6A /* WEASY-RING.caf in Resources */ = {isa = PBXBuildFile; fileRef = E0F253962643904E0041EB6A /* WEASY-RING.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,7 @@
 		81E1F2003E4334327DC7145B /* Pods-WeasyVendor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeasyVendor.debug.xcconfig"; path = "Target Support Files/Pods-WeasyVendor/Pods-WeasyVendor.debug.xcconfig"; sourceTree = "<group>"; };
 		E085173125D1763300C14C1F /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
 		E085173A25D1794B00C14C1F /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
+		E0F253962643904E0041EB6A /* WEASY-RING.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WEASY-RING.caf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +248,7 @@
 		655D14E523DE9947003BD4F9 /* WeasyVendor */ = {
 			isa = PBXGroup;
 			children = (
+				E0F253962643904E0041EB6A /* WEASY-RING.caf */,
 				65D473DD240BFFC300F368D9 /* WeasyVendor.entitlements */,
 				65EB687123F3B60D006F6146 /* Cells */,
 				655BE3F023EC2CFB005E4F95 /* Models */,
@@ -476,6 +479,7 @@
 				65A8320523FD817F003AB200 /* Localizable.strings in Resources */,
 				655D14F623DE9948003BD4F9 /* LaunchScreen.storyboard in Resources */,
 				655D14F323DE9948003BD4F9 /* Assets.xcassets in Resources */,
+				E0F253972643904E0041EB6A /* WEASY-RING.caf in Resources */,
 				655D14EE23DE9947003BD4F9 /* Main.storyboard in Resources */,
 				655D152023DEA172003BD4F9 /* tapsView.xib in Resources */,
 				6541080B2484252800D8EF9D /* GoogleService-Info.plist in Resources */,
@@ -778,7 +782,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 8.0.2;
+				MARKETING_VERSION = 8.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativitySol.WeasyVendor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -801,7 +805,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 8.0.2;
+				MARKETING_VERSION = 8.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.creativitySol.WeasyVendor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
