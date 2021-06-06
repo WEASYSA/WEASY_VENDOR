@@ -2820,6 +2820,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
+        <segue reference="gmm-ca-Oe2"/>
         <segue reference="wx0-gJ-UrK"/>
         <segue reference="LqA-VC-Q5p"/>
         <segue reference="y3v-aC-0lG"/>
