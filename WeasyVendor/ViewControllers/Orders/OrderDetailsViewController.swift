@@ -308,7 +308,7 @@ extension OrderDetailsViewController{
     
     func maindetails(){
         timeLbl.text = order.time
-        priceLbl.text = String(order.price) + NSLocalizedString("SAR", comment: "")
+        priceLbl.text = String(order.priceWithoutFees) + NSLocalizedString("SAR", comment: "")
         orderNumberLbl.text = String(order.number)
         timeLbl.text = order.time
         paymentTypeLbl.text = NSLocalizedString(order.payment, comment: "") 

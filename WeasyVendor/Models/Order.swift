@@ -13,6 +13,7 @@ class Order{
     var time = ""
     var status = ""
     var price = 0.0
+    var priceWithoutFees = 0.0
     var user = User()
     var timer = 0
     var number = ""
@@ -35,6 +36,14 @@ class Order{
         else if let  _price = dictionary["total_price"] as? Double{
             price = _price
         }
+
+        if let _priceWithoutFees = dictionary["net_total_price_with_out_online_fees"] as? String{
+            priceWithoutFees = Double(_priceWithoutFees)!
+        }
+        else if let  _priceWithoutFees = dictionary["net_total_price_with_out_online_fees"] as? Double{
+            priceWithoutFees = _priceWithoutFees
+        }
+
         if let _status = dictionary["status"] as? String {
             status = _status
         }

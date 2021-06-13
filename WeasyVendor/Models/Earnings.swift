@@ -17,6 +17,7 @@ class Earnings{
     var ordersRejected = 0
     var totalCash = 0.0
     var totalCreditCard = 0.0
+    var totalCreditCardWithoutFees = 0.0
     
     init(){
         
@@ -46,6 +47,10 @@ class Earnings{
         if let _totalCreditCard = dictionary["total_credit_card_payment"] as? Double {
             totalCreditCard = _totalCreditCard
         }
+        if let _totalCreditCardWithoutOnlineFees = dictionary["total_credit_card_payment_with_out_fees"] as? Double {
+            totalCreditCardWithoutFees = _totalCreditCardWithoutOnlineFees
+        }
+        
         if let _totalCash = dictionary["total_cash_payment"] as? Double {
             totalCash = _totalCash
         }

@@ -51,8 +51,8 @@ class earningsViewController: UIViewController {
                 self.ordersCompletedLbl.text = String (earnings.ordersCompleted)
                 self.ordersRejectedLbl.text = String (earnings.ordersRejected)
                 self.totalCashLbl.text = String (earnings.totalCash)
-                self.totalCreditLbl.text = String (earnings.totalCreditCard)
-                self.moneyLbl.text = String (earnings.price)
+                self.totalCreditLbl.text = String (earnings.totalCreditCardWithoutFees)
+                self.moneyLbl.text = String (earnings.totalCreditCardWithoutFees)
             }
             else if check == 1{
                 self.view.makeToast(msg)

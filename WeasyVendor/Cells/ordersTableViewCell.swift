@@ -10,7 +10,7 @@ import UIKit
 import SwipeCellKit
 
 class ordersTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var priceLbl: UILabel!
     @IBOutlet weak var customerNameLbl: UILabel!
     @IBOutlet weak var statusBtn: UIButton!
@@ -20,28 +20,23 @@ class ordersTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     func setData(order: Order){
         timeLbl.text = order.time
         customerNameLbl.text = order.user.name
-        priceLbl.text = String (order.price) + NSLocalizedString("SAR", comment: "")
+        priceLbl.text = String (order.priceWithoutFees) + NSLocalizedString("SAR", comment: "")
         orderNumberLbl.text = order.number
         if order.status != ""{
-           
-        statusBtn.setTitle( NSLocalizedString(order.status, comment: ""), for: .normal)
-        
+            statusBtn.setTitle( NSLocalizedString(order.status, comment: ""), for: .normal)
         }
         else{
             statusBtn.setTitle(NSLocalizedString("Waiting", comment: ""), for: .normal)
-
         }
-        
     }
     
-   
 }

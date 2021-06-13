@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Constants{
+class Constants {
+    
     static var DOMAIN = "https://weasy.sa/weasy/public/api/"
 //    static var DOMAIN = "https://weasy.sa/api/"
     static var LOGIN = DOMAIN + "vendor_login"
@@ -36,6 +37,7 @@ class Constants{
     static var LOGOUT = DOMAIN + "app_logout"
     static var MARK_AS_DEBTOR = DOMAIN + "vendor_debtor"
     static var vendor_branch_status = DOMAIN + "vendor_branch_status"
+    
     //vendor_debtor
     static var HEADER = [
         "token": "",

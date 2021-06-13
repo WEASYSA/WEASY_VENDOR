@@ -24,9 +24,7 @@ class OrderController{
                 }
             }
             completion(check, orders, msg)
-            
-            
-            
+
         }, link: link, param: [:])
     }
     func getOrderDetauls(completion: @escaping(Int,Order,Int,String)-> (),orderID: String){
