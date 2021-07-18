@@ -14,7 +14,7 @@ class User{
     var token = ""
     var id = 0
     var name = ""
-    var branchId = ""
+    var branchId = 0
     init(){
         
     }
@@ -27,6 +27,9 @@ class User{
         if let _id = dictionary["user_id"] as? Int {
             id = _id
         }
+        if let _branchId = dictionary["branch_id"] as? Int {
+            branchId = _branchId
+        }
         
         if let  _name = dictionary["name"] as? String {
             name = _name
@@ -35,8 +38,8 @@ class User{
         if let _userName = dictionary["username"] as? String {
             userName = _userName
         }
-
-        branchId = String (dictionary["branch_id"] as! Int)
+        
+    
 
     }
     

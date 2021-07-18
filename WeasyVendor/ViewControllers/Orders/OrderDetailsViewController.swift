@@ -34,15 +34,15 @@ class OrderDetailsViewController: UIViewController {
     //    @IBOutlet weak var startPreparingBtn: UIButton!
     
     @IBOutlet weak var topViewConst: NSLayoutConstraint!
-    @IBOutlet weak var plateNumberLabel: UILabel!
-    @IBOutlet weak var carBrandLabel: UILabel!
-    @IBOutlet weak var carModelLabel: UILabel!
-    @IBOutlet weak var modelColorLabel: UILabel!
-    @IBOutlet weak var modelTypeLabel: UILabel!
-    @IBOutlet weak var modelYearLabel: UILabel!
-    @IBOutlet weak var carStackView1: UIStackView!
-    @IBOutlet weak var carStackView2: UIStackView!
-    @IBOutlet weak var carStackView3: UIStackView!
+//    @IBOutlet weak var plateNumberLabel: UILabel!
+//    @IBOutlet weak var carBrandLabel: UILabel!
+//    @IBOutlet weak var carModelLabel: UILabel!
+//    @IBOutlet weak var modelColorLabel: UILabel!
+//    @IBOutlet weak var modelTypeLabel: UILabel!
+//    @IBOutlet weak var modelYearLabel: UILabel!
+//    @IBOutlet weak var carStackView1: UIStackView!
+//    @IBOutlet weak var carStackView2: UIStackView!
+//    @IBOutlet weak var carStackView3: UIStackView!
     
     var timer = Timer()
     var timeLeft: TimeInterval = 0
@@ -60,7 +60,7 @@ class OrderDetailsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getCarServiceStatus()
+//        getCarServiceStatus()
         getOrderDetails()
     }
     
@@ -294,7 +294,7 @@ extension OrderDetailsViewController{
             check, order,car,timer, msg in
             guard let self = self else {return}
             self.order.items = order.items
-            self.setCarData(car: car)
+//            self.setCarData(car: car)
             print( self.order.items)
             self.tableView.reloadData()
             if check == 0{
@@ -318,45 +318,45 @@ extension OrderDetailsViewController{
         }, orderID: self.order.number)
     }
     
-    func setCarData(car: CarModel? = nil) {
-        if car != nil {
-            guard let plateNumber = car?.plateNum, let carBrand = car?.carBrand, let carModel = car?.carModel, let modelColor = car?.modelColor, let modelType = car?.modelType, let modelYear = car?.modelYear else {
-                return
-            }
-            plateNumberLabel.text = "Plate Number: " + plateNumber
-            carBrandLabel.text = "Car Brand: " + carBrand
-            carModelLabel.text = "Car Model: " + carModel
-            modelColorLabel.text = "Model Color: " + modelColor
-            modelTypeLabel.text = "Model Type: " + modelType
-            modelYearLabel.text = "Model Year: " + modelYear
-        }
-    }
+//    func setCarData(car: CarModel? = nil) {
+//        if car != nil {
+//            guard let plateNumber = car?.plateNum, let carBrand = car?.carBrand, let carModel = car?.carModel, let modelColor = car?.modelColor, let modelType = car?.modelType, let modelYear = car?.modelYear else {
+//                return
+//            }
+//            plateNumberLabel.text = "Plate Number: " + plateNumber
+//            carBrandLabel.text = "Car Brand: " + carBrand
+//            carModelLabel.text = "Car Model: " + carModel
+//            modelColorLabel.text = "Model Color: " + modelColor
+//            modelTypeLabel.text = "Model Type: " + modelType
+//            modelYearLabel.text = "Model Year: " + modelYear
+//        }
+//    }
     
     
     
-    func getCarServiceStatus(){
-        BranchController.branchController.getCarServiceStatus { [weak self] (check, status, msg) in
-            guard let self = self else {return}
-            if check == 0 {
-                print(status)
-                if status == 1 {
-                    self.carStackView1.isHidden = false
-                    self.carStackView2.isHidden = false
-                    self.carStackView3.isHidden = false
-                    self.topViewConst.constant = 250
-                }else {
-                    self.carStackView1.isHidden = true
-                    self.carStackView2.isHidden = true
-                    self.carStackView3.isHidden = true
-                    self.topViewConst.constant = 100
-                }
-            }else if check == 1 {
-                self.view.makeToast(msg)
-            }else {
-                self.showErrorAlert(with: msg)
-            }
-        }
-    }
+//    func getCarServiceStatus(){
+//        BranchController.branchController.getCarServiceStatus { [weak self] (check, status, msg) in
+//            guard let self = self else {return}
+//            if check == 0 {
+//                print(status)
+//                if status == 1 {
+//                    self.carStackView1.isHidden = false
+//                    self.carStackView2.isHidden = false
+//                    self.carStackView3.isHidden = false
+//                    self.topViewConst.constant = 250
+//                }else {
+//                    self.carStackView1.isHidden = true
+//                    self.carStackView2.isHidden = true
+//                    self.carStackView3.isHidden = true
+//                    self.topViewConst.constant = 100
+//                }
+//            }else if check == 1 {
+//                self.view.makeToast(msg)
+//            }else {
+//                self.showErrorAlert(with: msg)
+//            }
+//        }
+//    }
     
     
     func maindetails(){

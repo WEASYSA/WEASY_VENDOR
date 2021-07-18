@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class UserController{
     static var userController = UserController()
@@ -31,8 +32,8 @@ class UserController{
         }, link: Constants.LOGIN, param: param)
     }
    
-    func addToken(branchId:String){
-        let param = ["fcm_token": AppDelegate.userToken,
+    func addToken(branchId:Int){
+        let param: Parameters = ["fcm_token": AppDelegate.userToken,
                      "device_type": "ios",
                      "user_type": "vendor",
                      "branch_id": branchId
