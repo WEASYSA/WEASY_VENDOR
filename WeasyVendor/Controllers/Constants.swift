@@ -29,6 +29,8 @@ class Constants {
     static var SUPPORT = DOMAIN + "vendor_support"
     static var GET_RUCH_TIME = DOMAIN + "vendor_get_timer_status"
     static var UPDATE_RUCH_TIME = DOMAIN + "vendor_timer_status"
+    static var CAR_SERVICE_STATUS = DOMAIN + "car_service_status"
+    static var GET_CAR_SERVICE_STATUS = DOMAIN + "vendor_get_car_service_status"
     static var DAIN_IN = DOMAIN + "vendor_dnn_table"
     static var GET_DAIN_IN = DOMAIN + "vendor_get_dnn_table"
     static var BOOKING_TABLE = DOMAIN + "vendor_list_reservation_table"

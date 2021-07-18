@@ -27,9 +27,10 @@ class OrderController{
 
         }, link: link, param: [:])
     }
-    func getOrderDetauls(completion: @escaping(Int,Order,Int,String)-> (),orderID: String){
+    func getOrderDetauls(completion: @escaping(Int,Order,CarModel?,Int,String)-> (),orderID: String){
         
         var order = Order()
+        var car: CarModel?
         APIConnection.apiConnection.getConnection(completion: {check, data, msg in
             
             print( Constants.ORDER_DETAILS + String(orderID))
@@ -41,14 +42,41 @@ class OrderController{
                         order.items.append(Item(withDetails: result[i] as! NSDictionary as! [String : Any]))
                     }
                 }
+        
             }
             if let _timer = data["timer"] as? Int{
                 timer = _timer
             }
+            if let carDataDicationry = data["car_data"] as? NSDictionary {
+                car = CarModel(with: carDataDicationry as? [String : Any])
+            }
+            
+//            if let carData = data["car_data"] as? NSDictionary {
+//                if let _plateNumber = carData["plateNum"] as? String {
+//                    plateNumber = _plateNumber
+//                }
+//                if let _carBrand = carData["carBrand"] as? String {
+//                    carBrand = _carBrand
+//                }
+//
+//                if let _carModel = carData["carModel"] as? String {
+//                    carModel = _carModel
+//                }
+//
+//                if let _modelColor = carData["modelColor"] as? String {
+//                    modelColor = _modelColor
+//                }
+//                if let _modelType = carData["modelType"] as? String {
+//                    modelType = _modelType
+//                }
+//                if let _modelYear = carData["modelYear"] as? String {
+//                    modelYear = _modelYear
+//                }
+//
+//            }
+     
             print(timer)
-            completion(check, order,timer, msg)
-            
-            
+            completion(check, order,car,timer, msg)
             
         }, link: Constants.ORDER_DETAILS + orderID)
     }

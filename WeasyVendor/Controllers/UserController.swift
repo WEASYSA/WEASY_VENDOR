@@ -16,7 +16,7 @@ class UserController{
         print(AppDelegate.userToken)
         let param = ["username": userName,
                      "password": password,
-                     "device_token": AppDelegate.userToken]
+        ]
         
         APIConnection.apiConnection.postConnection(completion: { check, data, msg in
             if check == 0{

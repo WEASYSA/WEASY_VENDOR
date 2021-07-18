@@ -31,6 +31,7 @@ class LoginViewController: UIViewController {
         UserController.userController.login(completion: {check, msg in
             
             if check == 0{
+                UserController.userController.addToken(branchId: AppDelegate.currentUser.branchId)
                 self.performSegue(withIdentifier: "home", sender: self)
             }
             else if check == 1{

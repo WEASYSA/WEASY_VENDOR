@@ -53,6 +53,9 @@ class BranchController {
         }, link: Constants.UPDATE_RUCH_TIME, param: param)
     }
     
+    
+    
+    
     func getDainIn(completion: @escaping(Int,Int,String)-> ()){
         APIConnection.apiConnection.getConnection(completion: {
             check, data, msg in
@@ -65,12 +68,32 @@ class BranchController {
         }, link: Constants.GET_DAIN_IN)
     }
     
+    
+    func getCarServiceStatus(completion: @escaping(Int, Int, String) -> ()) {
+        APIConnection.apiConnection.getConnection(completion: { (check, data, msg) in
+            print(data)
+            var status = 1
+            if let result = data["result"] as? NSDictionary{
+                status = result["car_service_status"] as! Int
+            }
+            completion(check,status,msg)
+        }, link: Constants.GET_CAR_SERVICE_STATUS)
+    }
+    
+    
     func updateDainIn(completion: @escaping(Int,String)-> (), dnn_table: Int){
         var param = ["dnn_table": dnn_table]
         APIConnection.apiConnection.postConnection(completion: {
             check, data, msg in
             completion(check,msg)
         }, link: Constants.DAIN_IN, param: param)
+    }
+    
+    func updateCarServiceStatus(completion: @escaping(Int, String) ->(), car_service_status: Int) {
+        let param = ["car_service_status": car_service_status]
+        APIConnection.apiConnection.postConnection(completion: { (check, data, msg) in
+            completion(check, msg)
+        }, link: Constants.CAR_SERVICE_STATUS, param: param)
     }
     
     func updateBranchStatus(completion: @escaping(Int,String)-> (), branch_status: String){

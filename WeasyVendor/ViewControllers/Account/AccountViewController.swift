@@ -11,6 +11,7 @@ import ActionSheetPicker_3_0
 
 class AccountViewController: UIViewController {
     
+    @IBOutlet weak var carServiceSwitch: UISwitch!
     @IBOutlet weak var dinerInSwitch: UISwitch!
     @IBOutlet weak var ruchTimeSwitch: UISwitch!
     
@@ -24,30 +25,48 @@ class AccountViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         setUpView()
+        getCarServiceStatus()
         getRushTime()
         getDainTime()
+    }    
+    
+    @IBAction func carServiceSwitchAction(_ sender: UISwitch) {
+        var status = 1
+        if sender.isOn{
+            status = 1
+        }else {
+            status = 0
+        }
+        
+        BranchController.branchController.updateCarServiceStatus(completion: {[weak self] (check, msg) in
+            guard let self = self else {return}
+            if check == 0 {
+                self.view.makeToast(msg)
+            }
+            else if check == 1 {
+                self.carServiceSwitch.setOn(!(self.carServiceSwitch != nil), animated: false)
+                self.view.makeToast(msg)
+            }
+            else {
+                self.showErrorAlert(with: msg)
+                self.carServiceSwitch.setOn(!(self.carServiceSwitch != nil), animated: false)
+            }
+        }, car_service_status: status)
         
     }
     
-    @IBAction func logoutAction(_ sender: Any) {
-        AppDelegate.defaults.set(nil, forKey: "token")
-        UserController.userController.logoutAndRemoveToken()
-        
-        self.performSegue(withIdentifier: "login", sender: self)
-    }
     @IBAction func dinerinAction(_ sender: UISwitch) {
         var status = 1
-        
         if sender.isOn {
             status = 1
         }
         else {
             status = 0
-            
         }
         
-        BranchController.branchController.updateDainIn(completion: {
+        BranchController.branchController.updateDainIn(completion: {[weak self]
             check, msg in
+            guard let self = self else {return}
             if check == 0{
                 self.view.makeToast(msg)
             }
@@ -115,9 +134,9 @@ class AccountViewController: UIViewController {
         })
     }
     func getDainTime(){
-        BranchController.branchController.getDainIn(completion: {
+        BranchController.branchController.getDainIn(completion: { [weak self]
             check, status, msg in
-            
+            guard let self = self else {return}
             if check == 0{
                 print(status)
                 if status == 1 {
@@ -135,6 +154,26 @@ class AccountViewController: UIViewController {
             }
         })
     }
+    
+    
+    func getCarServiceStatus(){
+        BranchController.branchController.getCarServiceStatus { [weak self] (check, status, msg) in
+            guard let self = self else {return}
+            if check == 0 {
+                print(status)
+                if status == 1 {
+                    self.carServiceSwitch.setOn(true, animated: false)
+                }else {
+                    self.carServiceSwitch.setOn(false, animated: false)
+                }
+            }else if check == 1 {
+                self.view.makeToast(msg)
+            }else {
+                self.showErrorAlert(with: msg)
+            }
+        }
+    }
+    
     
     @IBAction func btnChangeStatusAction(_ sender: UIButton) {
         ActionSheetMultipleStringPicker.show(withTitle: "Select Status", rows: [
@@ -162,5 +201,13 @@ class AccountViewController: UIViewController {
         }, cancel: { ActionMultipleStringCancelBlock in return }, origin: sender)
     }
     
+    
+    @IBAction func logoutAction(_ sender: Any) {
+        AppDelegate.defaults.set(nil, forKey: "token")
+//        AppDelegate.defaults.set(nil, forKey: "device_token")
+
+        UserController.userController.logoutAndRemoveToken()
+        self.performSegue(withIdentifier: "login", sender: self)
+    }
     
 }

@@ -33,5 +33,7 @@ class itemDetailsTableViewCell: UITableViewCell {
         priceLbl.text = String(item.price) + NSLocalizedString(" SAR", comment: "")
         noteLable.text = item.note
         optionsLable.text = item.size + item.options
+        itemImageView.sd_setImage(with: URL(string: item.image), placeholderImage: UIImage(named: "placeholder.png"))
+
     }
 }

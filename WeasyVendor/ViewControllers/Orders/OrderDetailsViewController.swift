@@ -31,16 +31,26 @@ class OrderDetailsViewController: UIViewController {
     @IBOutlet weak var readyToPickupStack: UIStackView!
     @IBOutlet weak var completedStack: UIStackView!
     @IBOutlet weak var payBtn: UIButton!
-//    @IBOutlet weak var startPreparingBtn: UIButton!
-
+    //    @IBOutlet weak var startPreparingBtn: UIButton!
+    
+    @IBOutlet weak var topViewConst: NSLayoutConstraint!
+    @IBOutlet weak var plateNumberLabel: UILabel!
+    @IBOutlet weak var carBrandLabel: UILabel!
+    @IBOutlet weak var carModelLabel: UILabel!
+    @IBOutlet weak var modelColorLabel: UILabel!
+    @IBOutlet weak var modelTypeLabel: UILabel!
+    @IBOutlet weak var modelYearLabel: UILabel!
+    @IBOutlet weak var carStackView1: UIStackView!
+    @IBOutlet weak var carStackView2: UIStackView!
+    @IBOutlet weak var carStackView3: UIStackView!
+    
     var timer = Timer()
     var timeLeft: TimeInterval = 0
     var endTime: Date?
     var order = Order()
-
+    var car: CarModel?
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setUpView()
         maindetails()
         let readyToPickupTap = UITapGestureRecognizer(target: self, action: #selector(readyToPickupTaped))
@@ -50,6 +60,7 @@ class OrderDetailsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        getCarServiceStatus()
         getOrderDetails()
     }
     
@@ -58,14 +69,14 @@ class OrderDetailsViewController: UIViewController {
             check ,msg in
             guard let self = self else {return}
             if check == 0{
-//                self.startPreparingBtn.isHidden = true
+                //                self.startPreparingBtn.isHidden = true
                 if self.order.payment == "cash"{
                     self.payBtn.isHidden = false
                 }
                 else {
                     self.payBtn.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
                     self.payBtn.isEnabled = false
-                   self.payBtn.isHidden = false
+                    self.payBtn.isHidden = false
                 }
                 self.timerStackView.isHidden = false
                 self.setupCounter()
@@ -82,7 +93,7 @@ class OrderDetailsViewController: UIViewController {
     }
     
     @IBAction func payAction(_ sender: Any) {
-
+        
         OrderController.orderController.PayOrder(completion: {[weak self]
             check ,msg in
             guard let self = self else {return}
@@ -139,22 +150,22 @@ class OrderDetailsViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
         }
-
+        
         OrderController.orderController.acceptOrders(completion: {[weak self]
             check, msg in
             guard let self = self else {return}
             if check == 0 {
                 //                                self.statusStackView.isHidden = false
-//                self.acceptRejectStackView.isHidden = true
+                //                self.acceptRejectStackView.isHidden = true
                 self.timerStackView.isHidden = false
-//                self.statusStackView.isHidden = false
-//                self.acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
+                //                self.statusStackView.isHidden = false
+                //                self.acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
                 self.setupCounter()
                 self.startPreparing()
                 
                 
-//                self.startPreparingBtn.isEnabled = true
-//                self.startPreparingBtn.isHidden = false
+                //                self.startPreparingBtn.isEnabled = true
+                //                self.startPreparingBtn.isHidden = false
                 //                self.acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
                 
             }
@@ -229,10 +240,10 @@ class OrderDetailsViewController: UIViewController {
             timerLbl.text = timeLeft.time
             
         } else {
-//            self.order.status = "ready to pickup"
+            //            self.order.status = "ready to pickup"
             acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
-//            readyToPickupBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
-//            readyToPickupStack.isUserInteractionEnabled = false
+            //            readyToPickupBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
+            //            readyToPickupStack.isUserInteractionEnabled = false
             completedStack.isUserInteractionEnabled = true
             self.timerStackView.isHidden = false
             timerLbl.text = timeLeft.time
@@ -280,9 +291,10 @@ extension OrderDetailsViewController{
     
     func getOrderDetails(){
         OrderController.orderController.getOrderDetauls(completion: {[weak self]
-            check, order,timer, msg in
+            check, order,car,timer, msg in
             guard let self = self else {return}
             self.order.items = order.items
+            self.setCarData(car: car)
             print( self.order.items)
             self.tableView.reloadData()
             if check == 0{
@@ -306,6 +318,47 @@ extension OrderDetailsViewController{
         }, orderID: self.order.number)
     }
     
+    func setCarData(car: CarModel? = nil) {
+        if car != nil {
+            guard let plateNumber = car?.plateNum, let carBrand = car?.carBrand, let carModel = car?.carModel, let modelColor = car?.modelColor, let modelType = car?.modelType, let modelYear = car?.modelYear else {
+                return
+            }
+            plateNumberLabel.text = "Plate Number: " + plateNumber
+            carBrandLabel.text = "Car Brand: " + carBrand
+            carModelLabel.text = "Car Model: " + carModel
+            modelColorLabel.text = "Model Color: " + modelColor
+            modelTypeLabel.text = "Model Type: " + modelType
+            modelYearLabel.text = "Model Year: " + modelYear
+        }
+    }
+    
+    
+    
+    func getCarServiceStatus(){
+        BranchController.branchController.getCarServiceStatus { [weak self] (check, status, msg) in
+            guard let self = self else {return}
+            if check == 0 {
+                print(status)
+                if status == 1 {
+                    self.carStackView1.isHidden = false
+                    self.carStackView2.isHidden = false
+                    self.carStackView3.isHidden = false
+                    self.topViewConst.constant = 250
+                }else {
+                    self.carStackView1.isHidden = true
+                    self.carStackView2.isHidden = true
+                    self.carStackView3.isHidden = true
+                    self.topViewConst.constant = 100
+                }
+            }else if check == 1 {
+                self.view.makeToast(msg)
+            }else {
+                self.showErrorAlert(with: msg)
+            }
+        }
+    }
+    
+    
     func maindetails(){
         timeLbl.text = order.time
         priceLbl.text = String(order.priceWithoutFees) + NSLocalizedString("SAR", comment: "")
@@ -325,7 +378,7 @@ extension OrderDetailsViewController{
         
         if order.status != "" && order.status != "declined" {
             payBtn.isHidden = false
-          
+            
             if order.isPaid || self.order.payment != "cash"{
                 payBtn.isEnabled = false
                 payBtn.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
@@ -355,14 +408,14 @@ extension OrderDetailsViewController{
             acceptRejectStackView.isHidden = true
             rejectedLbl.isHidden = true
             if order.status == "order placed" || (self.order.status == "payment done" && (self.order.payment == "online" || self.order.payment == "points")){
-//                self.startPreparingBtn.isHidden = false
+                //                self.startPreparingBtn.isHidden = false
                 self.timerStackView.isHidden = false
                 self.setupCounter()
             }else if order.status == "preparing"{
                 acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
                 readyToPickupStack.isUserInteractionEnabled = true
                 statusStackView.isHidden = false
-//                self.startPreparingBtn.isHidden = true
+                //                self.startPreparingBtn.isHidden = true
                 self.timerStackView.isHidden = false
                 self.setupCounter()
                 completedStack.isUserInteractionEnabled = false
@@ -372,14 +425,14 @@ extension OrderDetailsViewController{
                 readyToPickupBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
                 readyToPickupStack.isUserInteractionEnabled = false
                 completedStack.isUserInteractionEnabled = true
-//                self.startPreparingBtn.isHidden = true
+                //                self.startPreparingBtn.isHidden = true
                 self.statusStackView.isHidden = false
-
+                
                 self.timerStackView.isHidden = false
                 
             }
             else if order.status == "completed"{
-//                self.startPreparingBtn.isHidden = true
+                //                self.startPreparingBtn.isHidden = true
                 acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
                 readyToPickupBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
                 completedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
@@ -387,10 +440,11 @@ extension OrderDetailsViewController{
                 completedStack.isUserInteractionEnabled = false
                 self.timerStackView.isHidden = false
                 self.statusStackView.isHidden = false
-
+                
             }
         }
     }
+
 }
 
 extension OrderDetailsViewController: rejectOrderDelegate{
