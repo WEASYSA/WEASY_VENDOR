@@ -22,13 +22,14 @@ class splashViewController: UIViewController {
             print(AppDelegate.defaults.string(forKey: "token"))
             if AppDelegate.defaults.string(forKey: "token") != nil{
                 AppDelegate.currentUser.token = AppDelegate.defaults.string(forKey: "token")!
-                
-                
                 Constants.HEADER["token"] = AppDelegate.currentUser.token
                 print(AppDelegate.currentUser.token)
+                print("Branch Id: \(AppDelegate.currentUser.branchId)")
+                print("User Id: \(AppDelegate.currentUser.id)")
+                print("User Name: \(AppDelegate.currentUser.userName)")
+                print("Name: \(AppDelegate.currentUser.name)")
+                print("Token: \(AppDelegate.currentUser.token)")
                 self.getUserData()
-                //
-                
             }
             else {
                 //go to login"
@@ -53,7 +54,6 @@ class splashViewController: UIViewController {
         }
         )
     }
-    
     
     
 }

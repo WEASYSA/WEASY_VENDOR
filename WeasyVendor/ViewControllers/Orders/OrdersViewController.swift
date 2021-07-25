@@ -26,6 +26,12 @@ class OrdersViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         setUpView()
+        print("Branch Id: \(AppDelegate.currentUser.branchId)")
+        print("User Id: \(AppDelegate.currentUser.id)")
+        print("User Name: \(AppDelegate.currentUser.userName)")
+        print("Name: \(AppDelegate.currentUser.name)")
+        print("Token: \(AppDelegate.currentUser.token)")
+
         UserController.userController.addToken(branchId: AppDelegate.currentUser.branchId)
         getOrders()
     }

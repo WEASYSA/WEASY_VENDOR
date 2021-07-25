@@ -29,10 +29,14 @@ class LoginViewController: UIViewController {
         loginButton.isEnabled = false
         loginButton.alpha = 0.5
         UserController.userController.login(completion: {check, msg in
-            
             if check == 0{
-                UserController.userController.addToken(branchId: AppDelegate.currentUser.branchId)
                 self.performSegue(withIdentifier: "home", sender: self)
+                print("Branch Id: \(AppDelegate.currentUser.branchId)")
+                print("User Id: \(AppDelegate.currentUser.id)")
+                print("User Name: \(AppDelegate.currentUser.userName)")
+                print("Name: \(AppDelegate.currentUser.name)")
+                print("Token: \(AppDelegate.currentUser.token)")
+                UserController.userController.addToken(branchId: AppDelegate.currentUser.branchId)
             }
             else if check == 1{
                 self.view.makeToast(msg)

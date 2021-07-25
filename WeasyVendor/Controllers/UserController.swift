@@ -24,6 +24,7 @@ class UserController{
                 let result = data["result"] as! NSDictionary
                 AppDelegate.currentUser = User(with: result as! [String : Any])
                 print( AppDelegate.currentUser.token)
+                print(AppDelegate.currentUser.branchId)
                 AppDelegate.defaults.set(AppDelegate.currentUser.token, forKey: "token")
                 Constants.HEADER["token"] = AppDelegate.currentUser.token
             }
