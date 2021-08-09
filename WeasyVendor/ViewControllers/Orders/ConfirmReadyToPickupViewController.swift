@@ -23,7 +23,7 @@ class ConfirmReadyToPickupViewController: UIViewController {
     
     @IBAction func confirmBtn(_ sender: Any) {
         Delegate?.confirmReady()
-               self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: false, completion: nil)
     }
     
     @IBAction func cancelBtn(_ sender: Any) {

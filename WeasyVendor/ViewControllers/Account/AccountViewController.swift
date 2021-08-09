@@ -25,33 +25,33 @@ class AccountViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         setUpView()
-//        getCarServiceStatus()
+        getCarServiceStatus()
         getRushTime()
         getDainTime()
     }    
     
     @IBAction func carServiceSwitchAction(_ sender: UISwitch) {
-//        var status = 1
-//        if sender.isOn{
-//            status = 1
-//        }else {
-//            status = 0
-//        }
-//        
-//        BranchController.branchController.updateCarServiceStatus(completion: {[weak self] (check, msg) in
-//            guard let self = self else {return}
-//            if check == 0 {
-//                self.view.makeToast(msg)
-//            }
-//            else if check == 1 {
-//                self.carServiceSwitch.setOn(!(self.carServiceSwitch != nil), animated: false)
-//                self.view.makeToast(msg)
-//            }
-//            else {
-//                self.showErrorAlert(with: msg)
-//                self.carServiceSwitch.setOn(!(self.carServiceSwitch != nil), animated: false)
-//            }
-//        }, car_service_status: status)
+        var status = 1
+        if sender.isOn{
+            status = 1
+        }else {
+            status = 0
+        }
+        
+        BranchController.branchController.updateCarServiceStatus(completion: {[weak self] (check, msg) in
+            guard let self = self else {return}
+            if check == 0 {
+                self.view.makeToast(msg)
+            }
+            else if check == 1 {
+                self.carServiceSwitch.setOn(!(self.carServiceSwitch != nil), animated: false)
+                self.view.makeToast(msg)
+            }
+            else {
+                self.showErrorAlert(with: msg)
+                self.carServiceSwitch.setOn(!(self.carServiceSwitch != nil), animated: false)
+            }
+        }, car_service_status: status)
         
     }
     
@@ -155,25 +155,23 @@ class AccountViewController: UIViewController {
         })
     }
     
-    
-//    func getCarServiceStatus(){
-//        BranchController.branchController.getCarServiceStatus { [weak self] (check, status, msg) in
-//            guard let self = self else {return}
-//            if check == 0 {
-//                print(status)
-//                if status == 1 {
-//                    self.carServiceSwitch.setOn(true, animated: false)
-//                }else {
-//                    self.carServiceSwitch.setOn(false, animated: false)
-//                }
-//            }else if check == 1 {
-//                self.view.makeToast(msg)
-//            }else {
-//                self.showErrorAlert(with: msg)
-//            }
-//        }
-//    }
-    
+    func getCarServiceStatus(){
+        BranchController.branchController.getCarServiceStatus { [weak self] (check, status, msg) in
+            guard let self = self else {return}
+            if check == 0 {
+                print(status)
+                if status == 1 {
+                    self.carServiceSwitch.setOn(true, animated: false)
+                }else {
+                    self.carServiceSwitch.setOn(false, animated: false)
+                }
+            }else if check == 1 {
+                self.view.makeToast(msg)
+            }else {
+                self.showErrorAlert(with: msg)
+            }
+        }
+    }
     
     @IBAction func btnChangeStatusAction(_ sender: UIButton) {
         ActionSheetMultipleStringPicker.show(withTitle: "Select Status", rows: [

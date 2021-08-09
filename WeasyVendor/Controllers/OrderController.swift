@@ -48,7 +48,15 @@ class OrderController{
                 timer = _timer
             }
             if let carDataDicationry = data["car_data"] as? NSDictionary {
-                car = CarModel(with: carDataDicationry as? [String : Any])
+                if carDataDicationry == [:] {
+                    car = CarModel(with: nil)
+                    completion(check, order,nil,timer, msg)
+
+                }else {
+                    car = CarModel(with: carDataDicationry as? [String : Any])
+                    completion(check, order,car,timer, msg)
+
+                }
             }
             
 //            if let carData = data["car_data"] as? NSDictionary {
@@ -76,7 +84,6 @@ class OrderController{
 //            }
      
             print(timer)
-            completion(check, order,car,timer, msg)
             
         }, link: Constants.ORDER_DETAILS + orderID)
     }

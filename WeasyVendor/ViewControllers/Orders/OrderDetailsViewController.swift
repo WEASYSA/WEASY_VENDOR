@@ -33,34 +33,35 @@ class OrderDetailsViewController: UIViewController {
     @IBOutlet weak var payBtn: UIButton!
     //    @IBOutlet weak var startPreparingBtn: UIButton!
     
+    @IBOutlet weak var carDetailsStackView: UIStackView!
     @IBOutlet weak var topViewConst: NSLayoutConstraint!
-//    @IBOutlet weak var plateNumberLabel: UILabel!
-//    @IBOutlet weak var carBrandLabel: UILabel!
-//    @IBOutlet weak var carModelLabel: UILabel!
-//    @IBOutlet weak var modelColorLabel: UILabel!
-//    @IBOutlet weak var modelTypeLabel: UILabel!
-//    @IBOutlet weak var modelYearLabel: UILabel!
-//    @IBOutlet weak var carStackView1: UIStackView!
-//    @IBOutlet weak var carStackView2: UIStackView!
-//    @IBOutlet weak var carStackView3: UIStackView!
+    @IBOutlet weak var plateNumberLabel: UILabel!
+    @IBOutlet weak var carBrandLabel: UILabel!
+    @IBOutlet weak var carModelLabel: UILabel!
+    @IBOutlet weak var modelColorLabel: UILabel!
+    @IBOutlet weak var modelTypeLabel: UILabel!
+    @IBOutlet weak var modelYearLabel: UILabel!
+
     
     var timer = Timer()
     var timeLeft: TimeInterval = 0
     var endTime: Date?
     var order = Order()
     var car: CarModel?
+    var readyToPickupTap: UITapGestureRecognizer!
+    var completTap: UITapGestureRecognizer!
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
         maindetails()
-        let readyToPickupTap = UITapGestureRecognizer(target: self, action: #selector(readyToPickupTaped))
+        readyToPickupTap = UITapGestureRecognizer(target: self, action: #selector(readyToPickupTaped))
         readyToPickupStack.addGestureRecognizer(readyToPickupTap)
-        let completTap = UITapGestureRecognizer(target: self, action:  #selector(completTaped))
+
+        completTap = UITapGestureRecognizer(target: self, action:  #selector(completTaped))
         completedStack.addGestureRecognizer(completTap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        getCarServiceStatus()
         getOrderDetails()
     }
     
@@ -164,7 +165,7 @@ class OrderDetailsViewController: UIViewController {
                 self.startPreparing()
                 
                 
-                //                self.startPreparingBtn.isEnabled = true
+//                                self.startPreparingBtn.isEnabled = true
                 //                self.startPreparingBtn.isHidden = false
                 //                self.acceptedBtn.backgroundColor = UIColor(red: 241/255, green: 180/255, blue: 0/255, alpha: 1)
                 
@@ -205,6 +206,9 @@ class OrderDetailsViewController: UIViewController {
         
     }
     @objc func completTaped(){
+        self.completedBtn.isEnabled = false
+        self.completedBtn.alpha = 0.5
+        self.completedStack.removeGestureRecognizer(self.completTap)
         let confirmVC = self.storyboard?.instantiateViewController(withIdentifier: "confirm_complete") as! ConfirmCompleteViewController
         confirmVC.Delegate = self
         present(confirmVC, animated: false, completion: nil)
@@ -213,6 +217,9 @@ class OrderDetailsViewController: UIViewController {
     
     @objc func readyToPickupTaped(){
         //"ready to pickup"
+        self.readyToPickupBtn.isEnabled = false
+        self.readyToPickupBtn.alpha = 0.5
+        self.readyToPickupStack.removeGestureRecognizer(self.readyToPickupTap)
         let confirmVC = self.storyboard?.instantiateViewController(withIdentifier: "confirm_ready_to_up") as! ConfirmReadyToPickupViewController
         confirmVC.Delegate = self
         present(confirmVC, animated: false, completion: nil)
@@ -294,7 +301,13 @@ extension OrderDetailsViewController{
             check, order,car,timer, msg in
             guard let self = self else {return}
             self.order.items = order.items
-//            self.setCarData(car: car)
+            
+            if car == nil {
+                self.carDetailsStackView.isHidden = true
+            }else {
+                self.carDetailsStackView.isHidden = false
+                self.setCarData(car: car)
+            }
             print( self.order.items)
             self.tableView.reloadData()
             if check == 0{
@@ -318,19 +331,21 @@ extension OrderDetailsViewController{
         }, orderID: self.order.number)
     }
     
-//    func setCarData(car: CarModel? = nil) {
-//        if car != nil {
-//            guard let plateNumber = car?.plateNum, let carBrand = car?.carBrand, let carModel = car?.carModel, let modelColor = car?.modelColor, let modelType = car?.modelType, let modelYear = car?.modelYear else {
-//                return
-//            }
-//            plateNumberLabel.text = "Plate Number: " + plateNumber
-//            carBrandLabel.text = "Car Brand: " + carBrand
-//            carModelLabel.text = "Car Model: " + carModel
-//            modelColorLabel.text = "Model Color: " + modelColor
-//            modelTypeLabel.text = "Model Type: " + modelType
-//            modelYearLabel.text = "Model Year: " + modelYear
-//        }
-//    }
+    func setCarData(car: CarModel? = nil) {
+        if car != nil {
+            guard let plateNumber = car?.plateNum, let carBrand = car?.carBrand, let carModel = car?.carModel, let modelColor = car?.modelColor, let modelType = car?.modelType, let modelYear = car?.modelYear else {
+                return
+            }
+            plateNumberLabel.text = "Plate Number: " + plateNumber
+            carBrandLabel.text = "Car Brand: " + carBrand
+            carModelLabel.text = "Car Model: " + carModel
+            modelColorLabel.text = "Model Color: " + modelColor
+            modelTypeLabel.text = "Model Type: " + modelType
+            modelYearLabel.text = "Model Year: " + modelYear
+        }else {
+            carDetailsStackView.isHidden = true
+        }
+    }
     
     
     
@@ -340,15 +355,9 @@ extension OrderDetailsViewController{
 //            if check == 0 {
 //                print(status)
 //                if status == 1 {
-//                    self.carStackView1.isHidden = false
-//                    self.carStackView2.isHidden = false
-//                    self.carStackView3.isHidden = false
-//                    self.topViewConst.constant = 250
+//                    self.carDetailsStackView.isHidden = false
 //                }else {
-//                    self.carStackView1.isHidden = true
-//                    self.carStackView2.isHidden = true
-//                    self.carStackView3.isHidden = true
-//                    self.topViewConst.constant = 100
+//                    self.carDetailsStackView.isHidden = true
 //                }
 //            }else if check == 1 {
 //                self.view.makeToast(msg)
@@ -475,9 +484,16 @@ extension OrderDetailsViewController: ConfirmReadyToPickupDelegate{
                 self.readyToPickupStack.isUserInteractionEnabled = false
                 self.completedStack.isUserInteractionEnabled = true
                 self.timeLeft = 0
+                self.readyToPickupBtn.isEnabled = true
+                self.readyToPickupBtn.alpha = 1
+                self.readyToPickupStack.addGestureRecognizer(self.readyToPickupTap)
+
             }
             else if check == 1{
                 self.view.makeToast(msg)
+                self.readyToPickupBtn.isEnabled = true
+                self.readyToPickupBtn.alpha = 1
+                self.readyToPickupStack.addGestureRecognizer(self.readyToPickupTap)
             }
             else {
                 self.showErrorAlert(with: msg)
@@ -499,10 +515,16 @@ extension OrderDetailsViewController: ConfirmCompleteDelegate{
                 self.readyToPickupStack.isUserInteractionEnabled = false
                 self.completedStack.isUserInteractionEnabled = false
                 self.timeLeft = 0
-                
+                self.completedBtn.isEnabled = true
+                self.completedBtn.alpha = 1
+                self.completedStack.addGestureRecognizer(self.completTap)
+
             }
             else if check == 1{
                 self.view.makeToast(msg)
+                self.completedBtn.isEnabled = true
+                self.completedBtn.alpha = 1
+                self.completedStack.addGestureRecognizer(self.completTap)
             }
             else {
                 self.showErrorAlert(with: msg)
